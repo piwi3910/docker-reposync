@@ -23,3 +23,9 @@ And let's download and create repository.
 ```
 # docker run --rm -d -it -v /path-to-your-repo-dir:/repo --name reposync tmatsuo/reposync
 ```
+
+# ENV
+
+* PROXY
+  * It specify http proxy server. 
+  * If /path-to-your-repo-dir/conf dir exists, this env is ignored so you have to edit yum.conf manually.
