@@ -33,7 +33,7 @@ fi
 
 init
 
-echo "### Downloding repositories ###"
+echo "### Downloading repositories ###"
 if [ "$1" != "" ]; then
     REPOSYNC_OPTIONS="$REPOSYNC_OPTIONS $@"
     echo "reposync options = $REPOSYNC_OPTIONS"
