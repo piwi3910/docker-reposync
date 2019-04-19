@@ -47,7 +47,12 @@ fi
 echo "### Creating repositories ###"
 
 for i in `ls /repo/repo`; do
+  if [ $REPO = 'base' ]
+  then
+    createrepo $CREATEREPO_OPTIONS -g comps.xml /repo/repo/$i
+  else
     createrepo $CREATEREPO_OPTIONS /repo/repo/$i
+  fi
 done
 
 if [ $? -ne 0 ]; then
