@@ -1,7 +1,7 @@
 #!/bin/bash
 
-REPOSYNC_OPTIONS="-c /repo/conf/yum.conf -p /repo/repo --downloadcomps --download-metadata"
-CREATEREPO_OPTIONS=""
+REPOSYNC_OPTIONS="-c /repo/conf/yum.conf -p /repo/repo --downloadcomps --download-metadata --cachedir=cachedir --newest-only"
+CREATEREPO_OPTIONS="--cachedir cachedir --update"
 
 function init() {
     if [ ! -d /repo/conf ]; then
