@@ -1,4 +1,4 @@
-From centos:7
+From centos:8
 
 RUN yum install -y yum-utils createrepo epel-release
 RUN yum install -y yum-plugin-fastestmirror yum-axelget
