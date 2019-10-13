@@ -26,7 +26,7 @@ build:
 test:
   stage: test
   script:
-    - docker run test_image_$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker run $CI_REGISTRY_IMAGE:latest
 
-include:
-  - template: Code-Quality.gitlab-ci.yml
+#include:
+#  - template: Code-Quality.gitlab-ci.yml
