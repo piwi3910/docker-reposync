@@ -1,0 +1,8 @@
+image: docker:git
+services:
+- docker:dind
+
+build:
+  script:
+  - docker build -t "$BUILD_IMAGE" .
+  - docker push "$BUILD_IMAGE"
