@@ -1,4 +1,11 @@
-# This file is a template, and might need editing before it works on your project.
+variables:
+  DOCKER_DRIVER: overlay
+  # Create the certificates inside this directory for both the server
+  # and client. The certificates used by the client will be created in
+  # /certs/client so we only need to share this directory with the
+  # volume mount in `config.toml`.
+  DOCKER_TLS_CERTDIR: "/certs"
+
 build-master:
   # Official docker image.
   image: docker:latest
