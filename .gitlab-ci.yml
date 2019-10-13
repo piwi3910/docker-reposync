@@ -1,11 +1,3 @@
-variables:
-  DOCKER_DRIVER: overlay
-  # Create the certificates inside this directory for both the server
-  # and client. The certificates used by the client will be created in
-  # /certs/client so we only need to share this directory with the
-  # volume mount in `config.toml`.
-  DOCKER_TLS_CERTDIR: "/certs"
-
 build-master:
   # Official docker image.
   image: docker:latest
@@ -15,8 +7,8 @@ build-master:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    - docker build --pull --cache-from $CI_REGISTRY_IMAGE:latest -t "$CI_REGISTRY_IMAGE:latest" .
+    - docker push "$CI_REGISTRY_IMAGE:latest"
   only:
     - master
 
