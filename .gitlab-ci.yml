@@ -1,16 +1,26 @@
 image: docker:latest
 
+variables:
+  DOCKER_DRIVER: overlay
+
 services:
-  - docker:dind
+ - docker:dind
 
 before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+ - docker info
+ - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
 
-variables:
-  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+after_script:
+ - docker logout $CI_REGISTRY
 
-build:
+autotagger-build:
   stage: build
-  script:
-    - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
+  script: docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG .
+  only:
+    - tags
+
+autotagger-push:
+  stage: deploy
+  script: docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+  only:
+    - tags
